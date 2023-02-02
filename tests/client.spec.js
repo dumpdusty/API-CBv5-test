@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import * as clientHelper from '../helpers/client-helper'
 
+
 describe('Clients tests', () => {
     describe('Create a client', () => {
         let res
