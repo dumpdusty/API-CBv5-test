@@ -25,7 +25,7 @@ describe('Space trimming test', () => {
     });
 });
 
-describe.only('Email confirmation', () => {
+describe('Email confirmation', () => {
     const testEmail = 'user_' + Date.now() + '@pirate.com'
     let str, endPoint, res, check
     before(async () => {
