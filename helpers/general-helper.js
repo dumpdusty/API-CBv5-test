@@ -17,6 +17,11 @@ function randomEmail(){
     return 'User_' + Date.now() + '@pirate.com'
 }
 
+function emailSearch(email){
+    return supertest(process.env.BASE_URL)
+        .post(`/email/search`)
+        .send({ email })
+}
 
 
-export { login, register, randomEmail }
+export { login, register, randomEmail, emailSearch }
