@@ -6,5 +6,5 @@ before(async ()=>{
         .post('/v5/user/login')
         .send({email: process.env.EMAIL, password: process.env.PASSWORD})
 
-    process.env['TOKEN'] = res.body.payload.token
+    process.env.TOKEN = res.body.payload.token
 })
