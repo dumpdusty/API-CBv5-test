@@ -3,4 +3,5 @@ module.exports = {
   timeout: '5000',
   spec: 'specs/**/*.js',
   ignore: 'specs/example.js',
+  file: 'project-config/auth-global-hook.js',
 }
