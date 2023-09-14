@@ -24,5 +24,24 @@ describe('Authentication', () => {
     })
   })
 
-  describe('Auth with invalid credentials', () => {})
+  describe('Auth with invalid credentials', () => {
+    let res
+    before(async () => {
+      res = await request(process.env.BASE_URL)
+        .post('/user/login')
+        .send({ email: 'invalid', password: 'invalid' })
+    })
+
+    it('validate status code', async () => {
+      await expect(res.statusCode).to.eq(400)
+    })
+
+    it('validate response message', () => {
+      expect(res.body.message).to.eq('Auth failed')
+    })
+
+    it('check the token exist', () => {
+      expect(res.body.payload).to.not.haveOwnProperty('token')
+    })
+  })
 })
