@@ -6,7 +6,7 @@ describe('Authentication', () => {
   describe('Authentication with valid credentials', () => {
     let res
     before(async () => {
-      res = await login(process.env.EMAIL, process.env.PASSWORD)
+      res = await login()
     })
 
     it('validate status code', async () => {
