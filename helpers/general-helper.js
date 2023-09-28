@@ -12,8 +12,11 @@ function register(firstName, lastName, email, password) {
     .send({ firstName, lastName, email, password })
 }
 
+function emailSearch(email) {
+  return request(process.env.BASE_URL).post(`/email/search`).send({ email })
+}
 // function randomEmail() {
 //   return 'user_' + Date.now() + '@pirate.com'
 // }
 
-export { login, register }
+export { login, register, emailSearch }
