@@ -1,4 +1,4 @@
-import { login, register } from '../helpers/general-helper'
+import { login, register, emailSearch } from '../helpers/general-helper'
 import request from 'supertest'
 import { expect } from 'chai'
 
@@ -6,7 +6,7 @@ const chance = require('chance').Chance()
 
 describe('Email confirmation', () => {
   let res, string, endPoint, confirmation
-  it('verify status code', async () => {
+  before(async () => {
     const randomEmail = 'user_' + Date.now() + '@pirate.com'
 
     await register(
@@ -16,24 +16,22 @@ describe('Email confirmation', () => {
       process.env.PASSWORD
     )
 
-    res = await login(randomEmail, process.env.PASSWORD)
-
-    expect(res.body.payload.user.roles).to.include('new')
-
-    string = await request(process.env.BASE_URL)
-      .post('/email/search')
-      .send({ email: randomEmail })
+    string = await emailSearch(randomEmail)
 
     endPoint = string.body.payload.items[0].message
       .split('\n')[4]
       .split('https://clientbase.us')[1]
 
-    confirmation = await request(process.env.BASE_URL).get(endPoint)
+    confirmation = await request(process.env.BASE_URL).get(endPoint).send()
 
     res = await login(randomEmail, process.env.PASSWORD)
+  })
 
-    expect(res.statusCode).to.eq(200)
+  it('verify status code', async () => {
+    expect(confirmation.statusCode).to.eq(200)
+  })
 
+  it('verify role "verified" assigned', () => {
     expect(res.body.payload.user.roles).to.include('verified')
   })
 })
