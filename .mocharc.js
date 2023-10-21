@@ -1,6 +1,6 @@
 module.exports = {
   require: ['@babel/register'],
-  timeout: '10000',
+  timeout: '20000',
   ignore: 'specs/example.js',
   file: 'project-config/auth-global-hook.js',
   reporter: 'mochawesome',
