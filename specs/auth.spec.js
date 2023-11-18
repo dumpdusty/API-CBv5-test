@@ -37,5 +37,9 @@ describe('Authentication', () => {
     it('check the token exist', () => {
       expect(res.body.payload).to.not.haveOwnProperty('token')
     })
+
+    it('just for test', () => {
+      console.log('test')
+    })
   })
 })
